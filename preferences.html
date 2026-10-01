@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preferences — Daily Tech &amp; AI Scout</title>
+  <meta name="description" content="Manage your Daily Tech & AI Scout briefing topics and delivery preferences.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .pref-container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .pref-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-card);
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+    .pref-title {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+    .pref-subtitle {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      margin-bottom: 24px;
+    }
+    .form-group {
+      margin-bottom: 22px;
+    }
+    .form-label {
+      display: block;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .radio-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .radio-item:hover {
+      border-color: var(--color-primary);
+      background: var(--bg-subtle);
+    }
+    .radio-item input[type="radio"] {
+      accent-color: var(--color-primary);
+      width: 17px;
+      height: 17px;
+    }
+    .time-input {
+      background: #FFFFFF;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 0.92rem;
+      width: 140px;
+    }
+    .time-input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+    .btn-danger {
+      background: transparent;
+      border: 1px solid #FEE2E2;
+      color: #DC2626;
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .btn-danger:hover {
+      background: #FEF2F2;
+      border-color: #FECDD3;
+    }
+    .status-alert {
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+      display: none;
+    }
+    .alert-success {
+      background: #ECFDF5;
+      color: #065F46;
+      border: 1px solid #A7F3D0;
+    }
+    .alert-error {
+      background: #FEF2F2;
+      color: #991B1B;
+      border: 1px solid #FECDD3;
+    }
+    .user-pill {
+      display: inline-block;
+      background: var(--color-primary-bg);
+      color: var(--color-primary);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 0.8rem;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="Daily Tech & AI Scout Home">
+        <span class="brand-title">Daily Tech &amp; AI Scout</span>
+        <span class="brand-subtitle">Subscriber Settings &amp; Preferences</span>
+      </a>
+
+      <div class="header-controls">
+        <a href="index.html" class="btn-secondary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>Back to Feed</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Preferences / Login View -->
+  <main class="pref-container">
+    <div id="status-box" class="status-alert"></div>
+
+    <!-- Authenticated View -->
+    <div id="auth-view" class="pref-card" style="display: none;">
+      <span class="user-pill" id="user-email-display">user@example.com</span>
+      <h1 class="pref-title">Your Subscription Preferences</h1>
+      <p class="pref-subtitle">Customize the topics and dispatch schedule for your morning intelligence.</p>
+
+      <form id="preferences-form">
+        <div class="form-group">
+          <label class="form-label">Briefing Topics</label>
+          <div class="radio-group">
+            <label class="radio-item">
+              <input type="radio" name="topics" value="both" checked>
+              <div>
+                <strong style="color: var(--text-primary); font-size: 0.92rem;">Both AI &amp; Cybersecurity</strong>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 2px;">Comprehensive dispatch covering research breakthroughs and critical security incidents.</p>
+              </div>
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="topics" value="ai">
+              <div>
+                <strong style="color: var(--text-primary); font-size: 0.92rem;">Artificial Intelligence Only</strong>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 2px;">Foundation models, agentic frameworks, and AI advancements.</p>
+              </div>
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="topics" value="security">
+              <div>
+                <strong style="color: var(--text-primary); font-size: 0.92rem;">Cybersecurity Only</strong>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 2px;">Zero-days, enterprise threat advisories, and critical vulnerabilities.</p>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="send-time">Preferred Send Time (IST)</label>
+          <input type="time" id="send-time" class="time-input" value="07:00">
+        </div>
+
+        <div class="btn-row">
+          <button type="submit" class="btn-primary" id="save-btn">Save Preferences</button>
+          <button type="button" class="btn-secondary" id="logout-btn">Log Out</button>
+        </div>
+      </form>
+
+      <hr style="margin: 32px 0; border: none; border-top: 1px solid var(--border-subtle);">
+
+      <!-- Danger Zone -->
+      <h3 style="font-family: var(--font-heading); font-size: 1rem; color: #DC2626; margin-bottom: 6px;">Manage Subscription</h3>
+      <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px;">Pause morning email dispatches or permanently delete your account data.</p>
+      
+      <div class="btn-row">
+        <button type="button" class="btn-secondary" id="unsubscribe-btn">Unsubscribe</button>
+        <button type="button" class="btn-danger" id="delete-btn">Delete Account</button>
+      </div>
+    </div>
+
+    <!-- Unauthenticated / Login View -->
+    <div id="unauth-view" class="pref-card">
+      <h1 class="pref-title">Sign In to Manage Preferences</h1>
+      <p class="pref-subtitle">Enter your email to receive a passwordless magic login link.</p>
+
+      <form id="magic-login-form">
+        <div class="form-group">
+          <label class="form-label" for="login-email">Email Address</label>
+          <input 
+            type="email" 
+            id="login-email" 
+            class="cta-input" 
+            placeholder="you@company.com" 
+            required
+            style="width: 100%; border: 1px solid var(--border-subtle); padding: 11px 14px; border-radius: 8px;"
+          >
+        </div>
+        <button type="submit" class="btn-primary" id="login-submit-btn" style="width: 100%;">
+          Send Magic Login Link
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    (function() {
+      const statusBox = document.getElementById('status-box');
+      function showStatus(msg, isError = false) {
+        statusBox.textContent = msg;
+        statusBox.className = `status-alert ${isError ? 'alert-error' : 'alert-success'}`;
+        statusBox.style.display = 'block';
+      }
+
+      async function checkAuth() {
+        try {
+          const res = await fetch('/me', { credentials: 'include' });
+          if (res.ok) {
+            const data = await res.json();
+            renderAuthenticated(data);
+          } else {
+            renderUnauthenticated();
+          }
+        } catch (e) {
+          renderUnauthenticated();
+        }
+      }
+
+      function renderAuthenticated(user) {
+        document.getElementById('auth-view').style.display = 'block';
+        document.getElementById('unauth-view').style.display = 'none';
+        document.getElementById('user-email-display').textContent = user.email;
+
+        const radios = document.getElementsByName('topics');
+        for (let r of radios) {
+          if (r.value === user.topics) r.checked = true;
+        }
+
+        if (user.preferred_send_time) {
+          document.getElementById('send-time').value = user.preferred_send_time;
+        }
+      }
+
+      function renderUnauthenticated() {
+        document.getElementById('auth-view').style.display = 'none';
+        document.getElementById('unauth-view').style.display = 'block';
+      }
+
+      document.getElementById('magic-login-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value.trim();
+        const btn = document.getElementById('login-submit-btn');
+        btn.disabled = true;
+        btn.textContent = 'Sending Magic Link...';
+
+        try {
+          const res = await fetch('/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+          });
+          const data = await res.json();
+          if (data.dev_magic_link) {
+            statusBox.innerHTML = `
+              <div style="font-weight: 700; margin-bottom: 4px;">Magic Login Link Generated!</div>
+              <p style="font-size: 0.85rem; margin-bottom: 10px;">Click below to authenticate immediately into your preference panel:</p>
+              <a href="${data.dev_magic_link}" class="btn-primary" style="display: inline-block; padding: 8px 18px; text-decoration: none;">Sign In Now &rarr;</a>
+            `;
+            statusBox.className = 'status-alert alert-success';
+            statusBox.style.display = 'block';
+          } else {
+            showStatus(data.message || 'If your email is registered, a magic login link has been sent. Check your inbox.');
+          }
+        } catch (err) {
+          showStatus('Error communicating with server: ' + err.message, true);
+        } finally {
+          btn.disabled = false;
+          btn.textContent = 'Send Magic Login Link';
+        }
+      });
+
+      document.getElementById('preferences-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const selectedTopic = document.querySelector('input[name="topics"]:checked').value;
+        const sendTime = document.getElementById('send-time').value;
+
+        const saveBtn = document.getElementById('save-btn');
+        saveBtn.disabled = true;
+        saveBtn.textContent = 'Saving...';
+
+        try {
+          const res = await fetch('/me', {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ topics: selectedTopic, preferred_send_time: sendTime })
+          });
+          if (res.ok) {
+            showStatus('Preferences updated successfully!');
+          } else {
+            showStatus('Failed to update preferences.', true);
+          }
+        } catch (err) {
+          showStatus('Network error while saving.', true);
+        } finally {
+          saveBtn.disabled = false;
+          saveBtn.textContent = 'Save Preferences';
+        }
+      });
+
+      document.getElementById('unsubscribe-btn').addEventListener('click', async () => {
+        if (!confirm('Are you sure you want to stop receiving morning briefings?')) return;
+        try {
+          const res = await fetch('/me', {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ topics: 'both' })
+          });
+          showStatus('You have been unsubscribed.');
+        } catch (e) {
+          showStatus('Failed to update subscription status.', true);
+        }
+      });
+
+      document.getElementById('delete-btn').addEventListener('click', async () => {
+        if (!confirm('Permanently delete your account and all stored preferences?')) return;
+        try {
+          const res = await fetch('/me', {
+            method: 'DELETE',
+            credentials: 'include'
+          });
+          if (res.ok) {
+            alert('Your account has been deleted.');
+            window.location.href = 'index.html';
+          } else {
+            showStatus('Failed to delete account.', true);
+          }
+        } catch (e) {
+          showStatus('Network error while deleting account.', true);
+        }
+      });
+
+      document.getElementById('logout-btn').addEventListener('click', () => {
+        document.cookie = 'auth_token=; Max-Age=0; path=/;';
+        window.location.reload();
+      });
+
+      checkAuth();
+    })();
+  </script>
+</body>
+</html>

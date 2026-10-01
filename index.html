@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Tech &amp; AI Scout — Autonomous Intelligence</title>
+  <meta name="description" content="A curated editorial briefing of the most consequential developments in artificial intelligence and cybersecurity.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+  <!-- Editorial Masthead Header -->
+  <header class="site-header">
+    <div class="container">
+      <!-- Top Utility Bar -->
+      <div class="header-top-bar">
+        <div class="header-date-badge">
+          <span class="edition-badge">Daily Briefing</span>
+          <span id="header-date">Wednesday, September 30, 2026</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <span>Curated autonomously from verified primary sources</span>
+        </div>
+      </div>
+
+      <!-- Main Navigation Bar -->
+      <div class="header-inner">
+        <a href="index.html" class="brand" aria-label="Daily Tech & AI Scout Home">
+          <span class="brand-title">Daily Tech &amp; AI Scout</span>
+          <span class="brand-subtitle">The morning intelligence briefing for technical leaders</span>
+        </a>
+
+        <div class="header-controls">
+          <!-- Past Reports Dropdown -->
+          <div class="reports-dropdown-wrapper">
+            <select id="past-reports-select" class="select-custom" aria-label="Select report date">
+              <option value="latest">Latest Edition</option>
+            </select>
+          </div>
+
+          <!-- Preferences / Account Button -->
+          <a href="preferences.html" class="btn-secondary" id="nav-login-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>My Preferences</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Editorial Content -->
+  <main class="container main-content">
+    
+    <!-- Hero Section: Featured Top Story (Side-by-Side Split) -->
+    <section class="hero-section" id="hero-top-story-section" aria-label="Featured Top Story">
+      <!-- Injected dynamically by JS -->
+    </section>
+
+    <!-- Section Heading for News Grid -->
+    <div class="section-header">
+      <h2 class="section-title">Latest Intelligence &amp; Dispatch</h2>
+      <span class="section-counter" id="grid-story-counter">6 developments</span>
+    </div>
+
+    <!-- 3-Column News Grid -->
+    <section class="news-grid" id="news-grid" aria-label="Daily Intelligence Grid">
+      <!-- Injected dynamically as 3-column flat cards with top thumbnail, category pill, title, 2-line summary, footer -->
+    </section>
+
+    <!-- Vibrant Primary Blue Call-to-Action Section -->
+    <section class="cta-section" id="newsletter-cta">
+      <div class="cta-box">
+        <div class="cta-tagline">Morning Intelligence Dispatch</div>
+        <h2 class="cta-title">Subscribe to our newsletter</h2>
+        <p class="cta-desc">
+          Receive the daily autonomous intelligence briefing delivered to your inbox every morning at 07:00 AM IST. Free forever, no spam.
+        </p>
+
+        <form class="cta-form" id="signup-form" onsubmit="event.preventDefault(); window.handleSignup?.(event);">
+          <input 
+            type="email" 
+            id="signup-email" 
+            class="cta-input" 
+            placeholder="Enter your email address" 
+            required
+            aria-label="Email address"
+          >
+          <button type="submit" id="signup-submit-btn" class="cta-btn">Subscribe Free</button>
+        </form>
+        <p class="cta-note" id="signup-status-msg">Instant one-click unsubscribe at any time.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Editorial Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="footer-year"></span> Daily Tech &amp; AI Scout. Synthesized autonomously by Google Gemini with search grounding.</p>
+      <div class="footer-links">
+        <a href="#">Top of Page</a>
+        <a href="preferences.html">Manage Preferences</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

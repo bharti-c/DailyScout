@@ -1,0 +1,48 @@
+name: DailyScout Autonomous Briefing
+
+on:
+  schedule:
+    # 07:00 IST is 01:30 UTC every day
+    - cron: '30 1 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+jobs:
+  run-daily-scout:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write # Allows committing updated daily reports
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Autonomous Scout and Dispatch Briefings
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          MONGODB_URI: ${{ secrets.MONGODB_URI }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          EMAIL_API_KEY: ${{ secrets.EMAIL_API_KEY }}
+          SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
+          PEXELS_API_KEY: ${{ secrets.PEXELS_API_KEY }}
+          FRONTEND_URL: ${{ secrets.FRONTEND_URL || 'https://dailyscout.dev' }}
+        run: |
+          python scout.py --send-email
+
+      - name: Commit and push daily reports
+        run: |
+          git config --global user.name "DailyScout Bot"
+          git config --global user.email "bot@dailyscout.dev"
+          git add reports/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update DailyScout briefing [$(date +'%Y-%m-%d')]" && git push)
