@@ -64,45 +64,6 @@ Inspect the rendered email template saved at `reports/email_preview.html`.
 
 ---
 
-## 🔑 Obtaining API Keys (Step-by-Step for Beginners)
-
-To run the live autonomous agent and send real emails, acquire the following free keys:
-
-### 1. Google Gemini API Key (`GEMINI_API_KEY`)
-1. Go to **[Google AI Studio](https://aistudio.google.com/)**.
-2. Sign in with your Google account.
-3. Click **Get API key** in the left menu and create a new key.
-4. Copy the generated key.
-
-### 2. MongoDB Atlas URI (`MONGODB_URI`)
-1. Visit **[MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register)** and register for a free account.
-2. Create a free **M0 Shared Cluster** (select your preferred region, e.g. AWS Mumbai or Frankfurt).
-3. Under **Security → Database Access**, create a user (e.g. `dailyscout_admin`) with a secure password.
-4. Under **Security → Network Access**, add IP `0.0.0.0/0` (allow access from anywhere) so cloud deployments like Render can connect.
-5. Click **Clusters → Connect → Drivers (Python)**. Copy the connection URI:
-   ```
-   mongodb+srv://dailyscout_admin:<password>@cluster0.abcde.mongodb.net/?retryWrites=true&w=majority
-   ```
-   *(Replace `<password>` with your database user password).*
-
-### 3. Resend Email API Key (`EMAIL_API_KEY`)
-1. Sign up at **[Resend](https://resend.com/)**.
-2. Navigate to **API Keys** and click **Create API Key** (Permissions: Full access).
-3. Copy the key (starts with `re_`).
-4. *Testing note*: For local testing, you can send from `onboarding@resend.dev` to the email you registered with Resend. For production, add and verify your custom domain in Resend.
-
-### 4. JWT Secret Key (`JWT_SECRET`)
-Generate a secure 32-character random string using Python:
-```bash
-python -c "import secrets; print(secrets.token_hex(32))"
-```
-
-### 5. Pexels API Key (`PEXELS_API_KEY`) *(Optional)*
-1. Create a free developer account at **[Pexels API](https://www.pexels.com/api/)**.
-2. Click **Your API Key** and copy the token.
-
----
-
 ## ⚙️ Environment Configuration
 
 1. Copy `.env.example` to `.env`:
